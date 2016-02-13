@@ -1,12 +1,12 @@
 require 'rspec'
 
 describe "solitaire cipher" do
-  describe "#encode" do
-    it "returns the encoded text" do
-      pending
-      expect(encode("CODEI NRUBY LIVEL ONGER")).to eq "GLNCQ MJAFF FVOMB JIYCB"
-    end
-  end
+  # describe "#encode" do
+  #   it "returns the encoded text" do
+  #     pending
+  #     expect(encode("CODEI NRUBY LIVEL ONGER")).to eq "GLNCQ MJAFF FVOMB JIYCB"
+  #   end
+  # end
 
   describe "#prepare_input" do
     it "sanitizes, upcases, splits and pads the input string" do
@@ -29,6 +29,12 @@ describe "solitaire cipher" do
       expect(split_in_groups_and_pad('abcdefg')).to eq 'abcde fgXXX'
     end
   end
+
+  describe "#letters_to_numbers" do
+    it "converts the letters to numbers" do
+      expect(letters_to_numbers('ABCDE XYZ')).to eq [[1, 2, 3, 4, 5], [24, 25, 26]]
+    end
+  end
 end
 
 def encode(input_string)
@@ -47,4 +53,10 @@ def split_in_groups_and_pad(input)
   groups = input.scan(/.{1,5}/)
   groups[-1] = groups[-1].ljust(5,"X")
   groups.join(' ')
+end
+
+def letters_to_numbers(string)
+  string.split(' ').map do |s|
+    s.split('').map { |c| c.ord - 'A'.ord + 1 }
+  end
 end
