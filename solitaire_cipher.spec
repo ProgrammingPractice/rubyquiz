@@ -14,13 +14,13 @@ describe "solitaire cipher" do
     end
   end
 
-  describe "#split_in_groups" do
+  describe "#split_in_groups_and_pad" do
     it "creates groups of 5 characters" do
-      expect(split_in_groups('abcdefghij')).to eq 'abcde fghij'
+      expect(split_in_groups_and_pad('abcdefghij')).to eq 'abcde fghij'
     end
 
     it "padds the last group with X's" do
-      expect(split_in_groups('abcdefg')).to eq 'abcde fgXXX'
+      expect(split_in_groups_and_pad('abcdefg')).to eq 'abcde fgXXX'
     end
   end
 
@@ -34,6 +34,8 @@ def keep_letters_and_upcase(string)
   string.gsub(/\W/, "").upcase
 end
 
-def split_in_groups(input)
-  input.scan(/.{1,5}/).join(' ')
+def split_in_groups_and_pad(input)
+  groups = input.scan(/.{1,5}/)
+  groups[-1] = groups[-1].ljust(5,"X")
+  groups.join(' ')
 end
