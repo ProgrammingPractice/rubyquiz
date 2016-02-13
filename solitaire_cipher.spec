@@ -1,4 +1,5 @@
 require 'rspec'
+require 'pry'
 
 describe "solitaire cipher" do
   # describe "#encode" do
@@ -35,6 +36,12 @@ describe "solitaire cipher" do
       expect(letters_to_numbers('ABCDE XYZ')).to eq [[1, 2, 3, 4, 5], [24, 25, 26]]
     end
   end
+
+  describe "#add_message_key_streams" do
+    it "adds the keys pairwise and takes module 26" do
+      expect(add_message_key_streams([[1,2,3,4,5],[20,21]], [[5,4,3,2,1],[6,6]])).to eq [[6,6,6,6,6], [26,1]]
+    end
+  end
 end
 
 def encode(input_string)
@@ -59,4 +66,8 @@ def letters_to_numbers(string)
   string.split(' ').map do |s|
     s.split('').map { |c| c.ord - 'A'.ord + 1 }
   end
+end
+
+def add_message_key_streams(first_array, second_array)
+  first_array.zip(second_array).map {|(a,b)| a.zip(b).map {|(m,n)| (m+n-2) % 26 + 2 }}
 end
