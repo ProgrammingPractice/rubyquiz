@@ -8,7 +8,7 @@ describe "solitaire cipher" do
     end
   end
 
-  describe "prepare input for encoding" do
+  describe "#prepare_input" do
     it "sanitizes, upcases, splits and pads the input string" do
       expect(prepare_input("CodIng\nIn Ru8y;is 4Un! YeY")).to eq "CODIN GINRU YISUN YEYXX"
     end
@@ -16,7 +16,7 @@ describe "solitaire cipher" do
 
   describe "#keep_letters_and_upcase" do
     it "should remove any non letter charaters and upcase all letters" do
-      expect(keep_letters_and_upcase("Code in Ruby, live longer!")).to eq "CODEINRUBYLIVELONGER"
+      expect(keep_letters_and_upcase("abc4 def\n ,!XY; z")).to eq "ABCDEFXYZ"
     end
   end
 
@@ -29,9 +29,6 @@ describe "solitaire cipher" do
       expect(split_in_groups_and_pad('abcdefg')).to eq 'abcde fgXXX'
     end
   end
-
-  # expect(encode("Code in Ruby, live longer!")).to eq "CODEI NRUBY LIVEL ONGER"
-
 end
 
 def encode(input_string)
@@ -43,7 +40,7 @@ def prepare_input(string)
 end
 
 def keep_letters_and_upcase(string)
-  string.gsub(/\W/, "").upcase
+  string.upcase.gsub(/[^A-Z]/, '')
 end
 
 def split_in_groups_and_pad(input)
