@@ -1,5 +1,6 @@
+# Problem description: http://rubyquiz.com/quiz1.html
+
 require 'rspec'
-require 'pry'
 
 describe "solitaire cipher" do
   # describe "#encode" do
@@ -37,9 +38,9 @@ describe "solitaire cipher" do
     end
   end
 
-  describe "#add_message_key_streams" do
-    it "adds the keys pairwise and takes module 26" do
-      expect(add_message_key_streams([[1,2,3,4,5],[20,21]], [[5,4,3,2,1],[6,6]])).to eq [[6,6,6,6,6], [26,1]]
+  describe "#add_keys" do
+    it "adds keys pairwise and substracts 26 if result is above 26" do
+      expect(add_keys([[1,2,3,4,5],[20,21]], [[5,4,3,2,1],[6,6]])).to eq [[6,6,6,6,6], [26,1]]
     end
   end
 end
@@ -68,6 +69,6 @@ def letters_to_numbers(string)
   end
 end
 
-def add_message_key_streams(first_array, second_array)
-  first_array.zip(second_array).map {|(a,b)| a.zip(b).map {|(m,n)| (m+n-2) % 26 + 2 }}
+def add_keys(first_array, second_array)
+  first_array.zip(second_array).map {|(a,b)| a.zip(b).map {|(m,n)| (m+n-1) % 26 + 1 }}
 end
