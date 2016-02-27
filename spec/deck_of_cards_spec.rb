@@ -2,13 +2,17 @@ require 'rspec'
 require_relative '../lib/deck_of_cards'
 
 describe DeckOfCards do
-  let(:deck_of_cards) { DeckOfCards.new }
+  let(:j1) { DeckOfCards::JOKER_A }
 
-  describe "#move_joker_A" do
-    let(:shuffeled_deck_of_cards) { (1..52).to_a + ["a", "b"] }
+  let(:deck) { DeckOfCards.new }
 
-    it "moves A joker 1 position down" do
-      expect(deck_of_cards.move_joker_A(shuffeled_deck_of_cards)).to eq (1..52).to_a + ["b","a"]
+  describe "#move_joker_A_down" do
+    it "moves joker A down one position" do
+      expect(deck.move_joker_A_down([j1, 1, 2, 3])).to eq [1, j1, 2, 3]
+    end
+
+    it "moves the joker A to top of deck when it is the last card" do
+      expect(deck.move_joker_A_down([1, 2, 3, j1])).to eql [j1, 1, 2, 3]
     end
   end
 end
