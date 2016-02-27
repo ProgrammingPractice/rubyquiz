@@ -23,7 +23,15 @@ class SolitaireCipher
     end
   end
 
-  def add_keys(first_array, second_array)
-    first_array.zip(second_array).map {|(a,b)| a.zip(b).map {|(m,n)| (m+n-1) % 26 + 1 }}
+  def add_keys_and_wrap(first_array, second_array)
+    first_array.zip(second_array).map {|(a,b)| a.zip(b).map {|(m,n)| wrap_after_26(m+n) }}
+  end
+
+  def wrap_after_26(number)
+    if number > 26
+      number - 26
+    else
+      number
+    end
   end
 end

@@ -39,9 +39,17 @@ describe SolitaireCipher do
     end
   end
 
-  describe "#add_keys" do
+  describe "#add_keys_and_wrap" do
     it "adds keys pairwise and substracts 26 if result is above 26" do
-      expect(cipher.add_keys([[1,2,3,4,5],[20,21]], [[5,4,3,2,1],[6,6]])).to eq [[6,6,6,6,6], [26,1]]
+      expect(cipher.add_keys_and_wrap([[1,2,3,4,5],[20,21]], [[5,4,3,2,1],[6,6]])).to eq [[6,6,6,6,6], [26,1]]
+    end
+  end
+
+  describe "#wrap_after_26" do
+    it "substracts 26 if number greater than 26" do
+      expect(cipher.wrap_after_26(1)).to eq 1
+      expect(cipher.wrap_after_26(26)).to eq 26
+      expect(cipher.wrap_after_26(27)).to eq 1
     end
   end
 end
