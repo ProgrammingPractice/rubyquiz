@@ -23,6 +23,10 @@ class SolitaireCipher
     end
   end
 
+  def numbers_to_letters(numbers)
+    numbers.map { |a| a.map { |n| (n + 'A'.ord - 1).chr }.join }.join(' ')
+  end
+
   def add_keys_and_wrap(first_array, second_array)
     first_array.zip(second_array).map {|(a,b)| a.zip(b).map {|(m,n)| wrap_after_26(m+n) }}
   end

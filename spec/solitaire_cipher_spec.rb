@@ -39,6 +39,12 @@ describe SolitaireCipher do
     end
   end
 
+  describe "#numbers_to_letters" do
+    it "converts numbers to letters" do
+      expect(cipher.numbers_to_letters([[1, 2, 3, 10, 11], [24, 25, 26]])).to eq 'ABCJK XYZ'
+    end
+  end
+
   describe "#add_keys_and_wrap" do
     it "adds keys pairwise and substracts 26 if result is above 26" do
       expect(cipher.add_keys_and_wrap([[1,2,3,4,5],[20,21]], [[5,4,3,2,1],[6,6]])).to eq [[6,6,6,6,6], [26,1]]
