@@ -46,4 +46,10 @@ describe DeckOfCards do
       expect(deck.triple_cut_around_jokers([1, j1, j2, 2])).to eq([2, j1, j2, 1])
     end
   end
+
+  describe "#perform_count_cut" do
+    it "uses the last card as a count for where to perform the cut" do
+      expect(deck.perform_count_cut([5, 6, 7, 8, 9, 2])).to eq [7, 8, 9, 5, 6, 2]
+    end
+  end
 end
