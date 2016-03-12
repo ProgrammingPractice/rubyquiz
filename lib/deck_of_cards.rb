@@ -20,6 +20,17 @@ class DeckOfCards
     right + middle + left
   end
 
+  def perform_count_cut(deck)
+    count = deck.last
+
+    return deck if [JOKER_A, JOKER_B].include?(count)
+
+    cut = deck[0..count-1]
+    remainder = deck[count..deck.size-2]
+
+    remainder + cut + [count]
+  end
+
   private
 
   def move_card_down(deck, card, positions)
