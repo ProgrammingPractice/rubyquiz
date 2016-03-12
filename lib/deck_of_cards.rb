@@ -13,11 +13,14 @@ class DeckOfCards
   private
 
   def move_card_down(deck, card, positions)
-    i = deck.index(card)
-    deck.delete_at(i)
-    if i >= deck.size - positions + 1
-      i = i - deck.size - 1
+    current = deck.index(card)
+    new = current + positions
+
+    if new >= deck.size
+      new -= deck.size
     end
-    deck.insert(i + positions, card)
+
+    deck.delete_at(current)
+    deck.insert(new, card)
   end
 end
