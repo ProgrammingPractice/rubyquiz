@@ -44,5 +44,9 @@ describe DeckOfCards do
       expect(deck.triple_cut_around_jokers([j2, 1, 2, j1, 3 ,4])).to eq [3, 4, j2, 1, 2, j1]
       expect(deck.triple_cut_around_jokers([1, 2, j1, 3, 4, j2])).to eq [j1, 3, 4, j2, 1, 2]
     end
+
+    it "handles adiacent Jokers" do
+      expect(deck.triple_cut_around_jokers([1, 2, j2, j1])).to eq([j2, j1, 1, 2])
+    end
   end
 end
