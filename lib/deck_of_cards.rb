@@ -14,8 +14,8 @@ class DeckOfCards
   def move_joker_B_down(deck)
     i = deck.index(JOKER_B)
     deck.delete_at(i)
-    if i == deck.size - 1
-      i = -2
+    if i >= deck.size - 1
+      i = i - deck.size - 1
     end
     deck.insert(i + 2, JOKER_B)
   end
