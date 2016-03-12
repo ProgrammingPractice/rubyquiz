@@ -17,7 +17,7 @@ class DeckOfCards
     middle = deck[l..r]
     right  = deck[(r + 1)..(deck.size - 1)]
 
-    right + middle + left
+    right.concat(middle).concat(left)
   end
 
   def perform_count_cut(deck)
@@ -28,8 +28,9 @@ class DeckOfCards
     cut = deck[0..count-1]
     remainder = deck[count..deck.size-2]
 
-    remainder + cut + [count]
+    remainder.concat(cut).concat([count])
   end
+
 
   private
 
