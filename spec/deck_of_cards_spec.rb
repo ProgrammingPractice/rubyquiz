@@ -39,5 +39,10 @@ describe DeckOfCards do
     it "does not assume that Joker A is the first one" do
       expect(deck.triple_cut_around_jokers([1, j2, 2, j1, 3])).to eq [3, j2, 2, j1, 1]
     end
+
+    it "does not assume that Jokers are 'inside' the pack" do
+      expect(deck.triple_cut_around_jokers([j2, 1, 2, j1, 3 ,4])).to eq [3, 4, j2, 1, 2, j1]
+      expect(deck.triple_cut_around_jokers([1, 2, j1, 3, 4, j2])).to eq [j1, 3, 4, j2, 1, 2]
+    end
   end
 end

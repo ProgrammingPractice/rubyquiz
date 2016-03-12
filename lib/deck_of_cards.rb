@@ -13,13 +13,13 @@ class DeckOfCards
   def triple_cut_around_jokers(deck)
     i = deck.index(JOKER_A)
     j = deck.index(JOKER_B)
-    min = [i, j].min
-    max = [i, j].max
-    i = min
-    j = max
-    left = deck[0..i - 1]
-    middle = deck[i..j]
-    right = deck[j + 1..deck.size - 1]
+
+    l = [i, j].min
+    r = [i, j].max
+
+    left = l > 0 ? deck[0..l - 1] : []
+    middle = deck[l..r]
+    right = deck[(r + 1)..(deck.size - 1)]
 
     right + middle + left
   end
