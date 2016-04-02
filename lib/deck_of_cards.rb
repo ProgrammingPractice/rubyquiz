@@ -25,7 +25,7 @@ class DeckOfCards
   def perform_count_cut(deck)
     count = deck.last
 
-    return deck if [JOKER_A, JOKER_B].include?(count)
+    return deck if card_is_joker?(count)
 
     cut = deck[0..count-1]
     remainder = deck[count..deck.size-2]
@@ -36,12 +36,17 @@ class DeckOfCards
   def obtain_letter(deck)
     position = deck[deck[0]]
     SolitaireCipher.new.numbers_to_letters([[position]])
+    return '' if card_is_joker?(card) 
   end
 
   private
 
   def move_card_down(deck, card, positions)
     current = deck.index(card)
+  def card_is_joker?(card)
+    [JOKER_A, JOKER_B].include?(card)
+  end
+
     new = current + positions
 
     if new >= deck.size
