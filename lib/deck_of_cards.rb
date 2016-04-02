@@ -55,15 +55,15 @@ class DeckOfCards
     [JOKER_A, JOKER_B].include?(card)
   end
 
-  def move_card_down(deck, card, positions)
-    current = deck.index(card)
-    new = current + positions
+  def move_card_down(deck, card, count)
+    current_position = deck.index(card)
+    new_position = current_position + count
 
-    if new >= deck.size
-      new -= deck.size
+    if new_position >= deck.size
+      new_position -= deck.size - 1
     end
 
-    deck.delete_at(current)
-    deck.insert(new, card)
+    deck.delete_at(current_position)
+    deck.insert(new_position, card)
   end
 end
