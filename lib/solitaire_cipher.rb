@@ -1,5 +1,13 @@
 class SolitaireCipher
+  attr_reader :deck
+
+  def initialize(deck)
+    @deck = deck
+  end
+
   def encode(input_string)
+    clean_input = prepare_input(input_string)
+    keystream = deck.obtain_keystream
   end
 
   def prepare_input(string)
@@ -24,6 +32,7 @@ class SolitaireCipher
   end
 
   def numbers_to_letters(numbers)
+    # FIXME: move this method to the module
     numbers.map { |a| a.map { |n| (wrap_after_26(n) + 'A'.ord - 1).chr }.join }.join(' ')
   end
 
