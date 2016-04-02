@@ -4,6 +4,14 @@ class DeckOfCards
   JOKER_A = "a"
   JOKER_B = "b"
 
+  def obtain_keystream(size, deck)
+    # move_joker_A_down(deck)
+    # move_joker_B_down(deck)
+    # triple_cut_around_jokers(deck)
+    # perform_count_cut(deck)
+    obtain_letter(deck)
+  end
+
   def move_joker_A_down(deck)
     move_card_down(deck, JOKER_A, 1)
   end

@@ -7,6 +7,13 @@ describe DeckOfCards do
 
   let(:deck) { DeckOfCards.new }
 
+  describe "#obtain_keystream" do
+    it "returns a keystream of n elements" do
+      cards = (1..52).to_a + [j1, j2]
+      expect(deck.obtain_keystream(5, cards)).to eq 'DWJXH'
+    end
+  end
+
   describe "#move_joker_A_down" do
     it "moves joker A down one position" do
       expect(deck.move_joker_A_down([j1, 1, 2, 3])).to eq [1, j1, 2, 3]
