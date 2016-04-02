@@ -10,7 +10,7 @@ describe DeckOfCards do
   describe "#obtain_keystream" do
     it "returns a keystream of n elements" do
       cards = (1..52).to_a + [j1, j2]
-      expect(deck.obtain_keystream(5, cards)).to eq 'DWJXH'
+      expect(deck.obtain_keystream(10, cards)).to eq 'DWJXHYRFDG'
     end
   end
 
