@@ -34,19 +34,20 @@ class DeckOfCards
   end
 
   def obtain_letter(deck)
-    position = deck[deck[0]]
-    SolitaireCipher.new.numbers_to_letters([[position]])
+    position = deck[0]
+    card = deck[position]
     return '' if card_is_joker?(card) 
+    SolitaireCipher.new.numbers_to_letters([[card]])
   end
 
   private
 
-  def move_card_down(deck, card, positions)
-    current = deck.index(card)
   def card_is_joker?(card)
     [JOKER_A, JOKER_B].include?(card)
   end
 
+  def move_card_down(deck, card, positions)
+    current = deck.index(card)
     new = current + positions
 
     if new >= deck.size

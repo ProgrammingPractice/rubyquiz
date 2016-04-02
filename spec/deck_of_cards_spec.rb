@@ -61,5 +61,13 @@ describe DeckOfCards do
     it "returns the letter value of the card at position calculated from first card" do
       expect(deck.obtain_letter([2, 3, 26])).to eq 'Z'
     end
+
+    it "does not return a letter if the output card is a joker" do
+      expect(deck.obtain_letter([1, j1])).to eq ''
+    end
+
+    it "returns the 54th card when first card is a joker" do
+      expect(deck.obtain_letter([[j1] + (1..52).to_a + [2]])).to eq 'B'
+    end
   end
 end
