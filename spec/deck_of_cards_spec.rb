@@ -56,4 +56,10 @@ describe DeckOfCards do
       expect(deck.perform_count_cut([1, 2, 3 , j1])).to eq [1, 2, 3 , j1]
     end
   end
+
+  describe "#obtain_letter" do
+    it "returns the letter value of the card at position calculated from first card" do
+      expect(deck.obtain_letter([2, 3, 26])).to eq 'Z'
+    end
+  end
 end

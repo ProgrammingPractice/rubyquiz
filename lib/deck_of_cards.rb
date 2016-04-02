@@ -1,3 +1,5 @@
+require 'solitaire_cipher'
+
 class DeckOfCards
   JOKER_A = "a"
   JOKER_B = "b"
@@ -31,6 +33,10 @@ class DeckOfCards
     remainder.concat(cut).concat([count])
   end
 
+  def obtain_letter(deck)
+    position = deck[deck[0]]
+    SolitaireCipher.new.numbers_to_letters([[position]])
+  end
 
   private
 
