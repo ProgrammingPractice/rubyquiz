@@ -24,7 +24,7 @@ class SolitaireCipher
   end
 
   def numbers_to_letters(numbers)
-    numbers.map { |a| a.map { |n| (n + 'A'.ord - 1).chr }.join }.join(' ')
+    numbers.map { |a| a.map { |n| (wrap_after_26(n) + 'A'.ord - 1).chr }.join }.join(' ')
   end
 
   def add_keys_and_wrap(first_array, second_array)

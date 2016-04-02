@@ -43,6 +43,10 @@ describe SolitaireCipher do
     it "converts numbers to letters" do
       expect(cipher.numbers_to_letters([[1, 2, 3, 10, 11], [24, 25, 26]])).to eq 'ABCJK XYZ'
     end
+
+    it "wraps around when alphabet length exceded" do
+      expect(cipher.numbers_to_letters([[27]])).to eq 'A'
+    end
   end
 
   describe "#add_keys_and_wrap" do
