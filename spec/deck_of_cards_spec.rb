@@ -67,7 +67,8 @@ describe DeckOfCards do
     end
 
     it "returns the 54th card when first card is a joker" do
-      expect(deck.obtain_letter([[j1] + (1..52).to_a + [2]])).to eq 'B'
+      cards = [j1] + (1..52).to_a + [2]
+      expect(deck.obtain_letter(cards)).to eq 'B'
     end
   end
 end

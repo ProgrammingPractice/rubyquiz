@@ -35,8 +35,9 @@ class DeckOfCards
 
   def obtain_letter(deck)
     position = deck[0]
+    position = 53 if card_is_joker?(position)
     card = deck[position]
-    return '' if card_is_joker?(card) 
+    return '' if card_is_joker?(card)
     SolitaireCipher.new.numbers_to_letters([[card]])
   end
 
