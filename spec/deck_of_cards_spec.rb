@@ -19,8 +19,8 @@ describe DeckOfCards do
       expect(deck.move_joker_A_down([j1, 1, 2, 3])).to eq [1, j1, 2, 3]
     end
 
-    it "moves the joker A to top of deck when it is the last card" do
-      expect(deck.move_joker_A_down([1, 2, 3, j1])).to eq [j1, 1, 2, 3]
+    it "moves the joker A below the top card when it is the last card" do
+      expect(deck.move_joker_A_down([1, 2, 3, j1])).to eq [1, j1, 2, 3]
     end
   end
 
