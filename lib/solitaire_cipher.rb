@@ -3,11 +3,14 @@ class SolitaireCipher
 
   def initialize(deck)
     @deck = deck
+    @deck_logic = DeckOfCards.new
   end
 
   def encode(input_string)
     clean_input = prepare_input(input_string)
-    keystream = deck.obtain_keystream
+    puts ">>>>>"
+    puts clean_input
+    keystream = @deck_logic.obtain_keystream(clean_input.size, deck)
   end
 
   def prepare_input(string)

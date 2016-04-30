@@ -6,11 +6,13 @@ describe SolitaireCipher do
   let(:deck) { nil }
 
   describe "#encode" do
-    let(:deck) { DeckOfCards.new }
+    let(:deck) { (1..52).to_a + [DeckOfCards::JOKER_A] + [DeckOfCards::JOKER_B] }
 
     it "returns the encoded text" do
-      message = "YOURC IPHER ISWOR KINGX"
-      encoded = "CLEPK HHNIY CFPWH FDFEH"
+      # message = "YOURC IPHER ISWOR KINGX"
+      # encoded = "CLEPK HHNIY CFPWH FDFEH"
+      message = "CODEI NRUBY LIVEL ONGER"
+      encoded = "AAA"
       expect(cipher.encode(message)).to eq encoded
     end
   end
