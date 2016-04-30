@@ -13,9 +13,9 @@ class SolitaireCipher
     keystream              = prepare_input(@deck_logic.obtain_keystream(clean_input.size, deck))
 
     message_numbers        = letters_to_numbers(clean_input)
-    # keystream_numbers      = letters_to_numbers(keystream)
-    # message_plus_keystream = add_keys_and_wrap(message_numbers, keystream_numbers)
-    # coded_message          = numbers_to_letters(message_plus_keystream)
+    keystream_numbers      = letters_to_numbers(keystream)
+    message_plus_keystream = add_keys_and_wrap(message_numbers, keystream_numbers)
+    coded_message          = split_into_groups_of_5(numbers_to_letters(message_plus_keystream))
   end
 
   def prepare_input(string)
@@ -42,17 +42,17 @@ class SolitaireCipher
     letters
   end
 
+  def split_into_groups_of_5(string)
+    string.scan(/.{1,5}/).join(' ')
+  end
+
   def letters_to_numbers(letters)
     letters.map { |letter| letter.ord - 'A'.ord + 1 }
   end
 
   def numbers_to_letters(numbers)
     # FIXME: move this method to the module
-    numbers.map { |word| convert_a_word(word) }.join(' ')
-  end
-
-  def convert_a_word(word)
-    word.map { |n| wrap_and_convert_to_letter(n) }.join
+    numbers.map { |number| wrap_and_convert_to_letter(number) }.join
   end
 
   def wrap_and_convert_to_letter(n)
@@ -64,7 +64,7 @@ class SolitaireCipher
   end
 
   def add_keys_and_wrap(first_array, second_array)
-    first_array.zip(second_array).map {|(a,b)| a.zip(b).map {|(m,n)| wrap_after_26(m+n) }}
+    first_array.zip(second_array).map {|(m,n)| wrap_after_26(m+n) }
   end
 
   def wrap_after_26(number)
