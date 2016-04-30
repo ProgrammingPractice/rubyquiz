@@ -51,7 +51,7 @@ class DeckOfCards
     position = 53 if card_is_joker?(position)
     card = deck[position]
     return '' if card_is_joker?(card)
-    NumbersAndLettersConverter.numbers_to_letters([[card]])
+    NumbersAndLettersConverter.number_to_letter(card)
   end
 
   private

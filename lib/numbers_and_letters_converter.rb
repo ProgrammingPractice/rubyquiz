@@ -1,5 +1,5 @@
 module NumbersAndLettersConverter
-  def self.numbers_to_letters(args)
-    SolitaireCipher.new(nil).numbers_to_letters(args)
+  def self.number_to_letter(number)
+    SolitaireCipher.new(nil).numbers_to_letters([[number]])
   end
 end
