@@ -33,7 +33,15 @@ class SolitaireCipher
 
   def numbers_to_letters(numbers)
     # FIXME: move this method to the module
-    numbers.map { |a| a.map { |n| (wrap_after_26(n) + 'A'.ord - 1).chr }.join }.join(' ')
+    numbers.map { |a| a.map { |n| wrap_and_convert_to_letter(n) }.join }.join(' ')
+  end
+
+  def wrap_and_convert_to_letter(n)
+    convert_to_letter(wrap_after_26(n))
+  end
+
+  def convert_to_letter(number)
+    (number + 'A'.ord - 1).chr
   end
 
   def add_keys_and_wrap(first_array, second_array)
@@ -47,4 +55,5 @@ class SolitaireCipher
       number
     end
   end
+
 end
