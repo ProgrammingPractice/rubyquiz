@@ -1,3 +1,5 @@
+require 'deck_of_cards'
+
 class SolitaireCipher
   attr_reader :deck
 
@@ -8,35 +10,40 @@ class SolitaireCipher
 
   def encode(input_string)
     clean_input            = prepare_input(input_string)
-
-    # FIXME: temporary solution by substracting 3
-    keystream              = prepare_input(@deck_logic.obtain_keystream(clean_input.size - 3, deck))
+    keystream              = prepare_input(@deck_logic.obtain_keystream(clean_input.size, deck))
 
     message_numbers        = letters_to_numbers(clean_input)
-    keystream_numbers      = letters_to_numbers(keystream)
-    message_plus_keystream = add_keys_and_wrap(message_numbers, keystream_numbers)
-    coded_message          = numbers_to_letters(message_plus_keystream)
+    # keystream_numbers      = letters_to_numbers(keystream)
+    # message_plus_keystream = add_keys_and_wrap(message_numbers, keystream_numbers)
+    # coded_message          = numbers_to_letters(message_plus_keystream)
   end
 
   def prepare_input(string)
     partial_result = keep_letters_and_upcase(string)
-    split_in_groups_and_pad(partial_result)
+    # split_in_groups_and_pad(partial_result)
+    letters = split_into_letters(partial_result)
+    pad_to_multiple_of_5(letters)
   end
 
   def keep_letters_and_upcase(string)
     string.upcase.gsub(/[^A-Z]/, '')
   end
 
-  def split_in_groups_and_pad(input)
-    groups = input.scan(/.{1,5}/)
-    groups[-1] = groups[-1].ljust(5,"X")
-    groups.join(' ')
+  def split_into_letters(string)
+    string.split('')
   end
 
-  def letters_to_numbers(string)
-    string.split(' ').map do |s|
-      s.split('').map { |c| c.ord - 'A'.ord + 1 }
+  def pad_to_multiple_of_5(letters)
+    modulo_leftover = letters.size % 5
+    pads_needed = modulo_leftover == 0 ? 0 : 5 - modulo_leftover
+    pads_needed.times do
+      letters << 'X'
     end
+    letters
+  end
+
+  def letters_to_numbers(letters)
+    letters.map { |letter| letter.ord - 'A'.ord + 1 }
   end
 
   def numbers_to_letters(numbers)
