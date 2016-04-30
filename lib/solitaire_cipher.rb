@@ -8,9 +8,13 @@ class SolitaireCipher
 
   def encode(input_string)
     clean_input = prepare_input(input_string)
-    puts ">>>>>"
-    puts clean_input
-    keystream = @deck_logic.obtain_keystream(clean_input.size, deck)
+    # FIXME: temporary solution by substracting 3
+    keystream = @deck_logic.obtain_keystream(clean_input.size - 3, deck)
+    keystream = prepare_input(keystream)
+    message_numbers = letters_to_numbers(clean_input)
+    keystream_numbers = letters_to_numbers(keystream)
+    message_plus_keystream = add_keys_and_wrap(message_numbers, keystream_numbers)
+    coded_message = numbers_to_letters(message_plus_keystream)
   end
 
   def prepare_input(string)
@@ -62,5 +66,4 @@ class SolitaireCipher
       number
     end
   end
-
 end
