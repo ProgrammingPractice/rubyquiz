@@ -34,6 +34,7 @@ class SolitaireCipher
   end
 
   def pad_to_multiple_of_5(letters)
+    # Idea - use: -7 % 5
     modulo_leftover = letters.size % 5
     pads_needed = modulo_leftover == 0 ? 0 : 5 - modulo_leftover
     pads_needed.times do
