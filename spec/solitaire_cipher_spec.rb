@@ -10,7 +10,7 @@ describe SolitaireCipher do
 
     it "returns the encoded text" do
       message = "Code in Ruby! Live longer!"
-      encoded = "AAA"
+      encoded = "GLNCQ MJAFF FVOMB JIYCB"
       expect(cipher.encode(message)).to eq encoded
     end
   end
