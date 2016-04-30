@@ -33,7 +33,11 @@ class SolitaireCipher
 
   def numbers_to_letters(numbers)
     # FIXME: move this method to the module
-    numbers.map { |a| a.map { |n| wrap_and_convert_to_letter(n) }.join }.join(' ')
+    numbers.map { |word| convert_a_word(word) }.join(' ')
+  end
+
+  def convert_a_word(word)
+    word.map { |n| wrap_and_convert_to_letter(n) }.join
   end
 
   def wrap_and_convert_to_letter(n)
