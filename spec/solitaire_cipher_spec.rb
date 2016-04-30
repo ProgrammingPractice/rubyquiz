@@ -2,14 +2,17 @@ require 'rspec'
 require_relative '../lib/solitaire_cipher'
 
 describe SolitaireCipher do
-  let(:cipher) { SolitaireCipher.new(nil) }
+  let(:cipher) { SolitaireCipher.new(deck) }
+  let(:deck) { nil }
 
   describe "#encode" do
-    # it "returns the encoded text" do
-    #   message = "YOURC IPHER ISWOR KINGX"
-    #   encoded = "CLEPK HHNIY CFPWH FDFEH"
-    #   expect(cipher.encode(message)).to eq encoded
-    # end
+    let(:deck) { DeckOfCards.new }
+
+    it "returns the encoded text" do
+      message = "YOURC IPHER ISWOR KINGX"
+      encoded = "CLEPK HHNIY CFPWH FDFEH"
+      expect(cipher.encode(message)).to eq encoded
+    end
   end
 
   describe "#prepare_input" do
