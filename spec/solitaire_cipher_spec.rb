@@ -9,11 +9,8 @@ describe SolitaireCipher do
     let(:deck) { (1..52).to_a + [DeckOfCards::JOKER_A] + [DeckOfCards::JOKER_B] }
 
     it "returns the encoded text" do
-      message = "Your cipher is working"
-      # message = "YOURC IPHER ISWOR KINGX"
+      message = "Your cipher is working."
       encoded = "CLEPK HHNIY CFPWH FDFEH"
-      # message = "CODEI NRUBY LIVEL ONGER"
-      # encoded = "AAA"
       expect(cipher.encode(message)).to eq encoded
     end
   end
