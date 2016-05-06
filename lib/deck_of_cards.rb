@@ -4,27 +4,33 @@ class DeckOfCards
   JOKER_A = "a"
   JOKER_B = "b"
 
-  def obtain_keystream(size, deck)
+  attr_reader :deck
+
+  def initialize(deck)
+    @deck = deck
+  end
+
+  def obtain_keystream(size)
     keystream = ''
     while keystream.size < size do
-      move_joker_A_down(deck)
-      move_joker_B_down(deck)
-      deck = triple_cut_around_jokers(deck)
-      deck = perform_count_cut(deck)
-      keystream << obtain_letter(deck)
+      move_joker_A_down
+      move_joker_B_down
+      @deck = triple_cut_around_jokers
+      @deck = perform_count_cut
+      keystream << obtain_letter
     end
     keystream
   end
 
-  def move_joker_A_down(deck)
-    move_card_down(deck, JOKER_A, 1)
+  def move_joker_A_down
+    move_card_down(JOKER_A, 1)
   end
 
-  def move_joker_B_down(deck)
-    move_card_down(deck, JOKER_B, 2)
+  def move_joker_B_down
+    move_card_down(JOKER_B, 2)
   end
 
-  def triple_cut_around_jokers(deck)
+  def triple_cut_around_jokers
     l, r = [deck.index(JOKER_A), deck.index(JOKER_B)].sort
 
     left   = l > 0 ? deck[0..l - 1] : []
@@ -34,7 +40,7 @@ class DeckOfCards
     right.concat(middle).concat(left)
   end
 
-  def perform_count_cut(deck)
+  def perform_count_cut
     count = deck.last
 
     return deck if card_is_joker?(count)
@@ -45,7 +51,7 @@ class DeckOfCards
     remainder.concat(cut).concat([count])
   end
 
-  def obtain_letter(deck)
+  def obtain_letter
     position = deck[0]
     position = 53 if card_is_joker?(position)
     card = deck[position]
@@ -59,7 +65,7 @@ class DeckOfCards
     [JOKER_A, JOKER_B].include?(card)
   end
 
-  def move_card_down(deck, card, count)
+  def move_card_down(card, count)
     current_position = deck.index(card)
     new_position = current_position + count
 

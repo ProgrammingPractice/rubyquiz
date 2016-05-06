@@ -5,7 +5,7 @@ class SolitaireCipher
 
   def initialize(cards)
     @cards = cards
-    @deck_logic = DeckOfCards.new
+    @deck_logic = DeckOfCards.new(nil)
   end
 
   def encode(message)
