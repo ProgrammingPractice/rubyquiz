@@ -35,10 +35,7 @@ class SolitaireCipher
 
   def pad_to_multiple_of_5(letters)
     pads_needed = (-letters.size) % 5
-    pads_needed.times do
-      letters << 'X'
-    end
-    letters
+    letters + ['X'] * pads_needed
   end
 
   def split_into_groups_of_5(string)
