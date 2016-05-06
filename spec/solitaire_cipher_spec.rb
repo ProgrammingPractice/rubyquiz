@@ -29,11 +29,11 @@ describe SolitaireCipher do
 
   describe "#pad_to_multiple_of_5" do
     it "should add two Xs at the end" do
-      expect(cipher.pad_to_multiple_of_5("abc")).to eq "abcXX"
+      expect(cipher.pad_to_multiple_of_5(%w(a b c))).to eq %w(a b c X X)
     end
 
     it "should not add any Xs" do
-      expect(cipher.pad_to_multiple_of_5("abcde")).to eq "abcde"
+      expect(cipher.pad_to_multiple_of_5(%w(a b c d e))).to eq %w(a b c d e)
     end
   end
 
