@@ -1,5 +1,4 @@
 require 'solitaire_cipher'
-require 'numbers_and_letters_converter'
 
 class DeckOfCards
   JOKER_A = "a"
@@ -51,7 +50,7 @@ class DeckOfCards
     position = 53 if card_is_joker?(position)
     card = deck[position]
     return '' if card_is_joker?(card)
-    NumbersAndLettersConverter.number_to_letter(card)
+    SolitaireCipher.new(nil).numbers_to_letters([card])
   end
 
   private
