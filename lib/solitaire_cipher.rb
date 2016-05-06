@@ -1,16 +1,13 @@
 require 'deck_of_cards'
 
 class SolitaireCipher
-  attr_reader :cards
-
-  def initialize(cards)
-    @cards = cards
-    @deck_logic = DeckOfCards.new(nil)
+  def initialize(deck)
+    @deck = deck
   end
 
   def encode(message)
     clean_input            = prepare_input(message)
-    keystream_string       = @deck_logic.obtain_keystream(clean_input.size, cards)
+    keystream_string       = @deck.obtain_keystream(clean_input.size)
     keystream              = split_into_letters(keystream_string)
 
     message_numbers        = letters_to_numbers(clean_input)

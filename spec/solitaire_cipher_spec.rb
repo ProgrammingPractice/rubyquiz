@@ -6,7 +6,7 @@ describe SolitaireCipher do
   let(:deck) { nil }
 
   describe "#encode" do
-    let(:deck) { (1..52).to_a + [DeckOfCards::JOKER_A] + [DeckOfCards::JOKER_B] }
+    let(:deck) { DeckOfCards.new((1..52).to_a + [DeckOfCards::JOKER_A] + [DeckOfCards::JOKER_B]) }
 
     it "returns the encoded text" do
       message = "Code in Ruby! Live longer! Go!"
