@@ -8,9 +8,10 @@ class SolitaireCipher
     @deck_logic = DeckOfCards.new
   end
 
-  def encode(input_string)
-    clean_input            = prepare_input(input_string)
-    keystream              = prepare_input(@deck_logic.obtain_keystream(clean_input.size, deck))
+  def encode(message)
+    clean_input            = prepare_input(message)
+    keystream_string       = @deck_logic.obtain_keystream(clean_input.size, deck)
+    keystream              = split_into_letters(keystream_string)
 
     message_numbers        = letters_to_numbers(clean_input)
     keystream_numbers      = letters_to_numbers(keystream)
@@ -20,7 +21,6 @@ class SolitaireCipher
 
   def prepare_input(string)
     partial_result = keep_letters_and_upcase(string)
-    # split_in_groups_and_pad(partial_result)
     letters = split_into_letters(partial_result)
     pad_to_multiple_of_5(letters)
   end
