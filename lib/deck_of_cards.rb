@@ -1,5 +1,3 @@
-require 'solitaire_cipher'
-
 class DeckOfCards
   JOKER_A = "a"
   JOKER_B = "b"
@@ -56,7 +54,31 @@ class DeckOfCards
     position = 53 if card_is_joker?(position)
     card = deck[position]
     return '' if card_is_joker?(card)
-    SolitaireCipher.new(nil).numbers_to_letters([card])
+    numbers_to_letters([card])
+  end
+
+  def letters_to_numbers(letters)
+    letters.map { |letter| letter.ord - 'A'.ord + 1 }
+  end
+
+  def numbers_to_letters(numbers)
+    numbers.map { |number| wrap_and_convert_to_letter(number) }.join
+  end
+
+  def wrap_and_convert_to_letter(n)
+    convert_to_letter(wrap_after_26(n))
+  end
+
+  def convert_to_letter(number)
+    (number + 'A'.ord - 1).chr
+  end
+
+  def wrap_after_26(number)
+    if number > 26
+      number - 26
+    else
+      number
+    end
   end
 
   private

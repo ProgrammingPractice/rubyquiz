@@ -79,4 +79,28 @@ describe DeckOfCards do
       expect(deck(cards).obtain_letter).to eq 'B'
     end
   end
+
+  describe "#letters_to_numbers" do
+    it "converts the letters to numbers" do
+      expect(deck(nil).letters_to_numbers('ABCDEXYZ'.split(''))).to eq [1, 2, 3, 4, 5, 24, 25, 26]
+    end
+  end
+
+  describe "#numbers_to_letters" do
+    it "converts numbers to letters" do
+      expect(deck(nil).numbers_to_letters([1, 2, 3, 10, 11, 24, 25, 26])).to eq 'ABCJKXYZ'
+    end
+
+    it "wraps around when alphabet length exceded" do
+      expect(deck(nil).numbers_to_letters([27])).to eq 'A'
+    end
+  end
+
+  describe "#wrap_after_26" do
+    it "substracts 26 if number greater than 26" do
+      expect(deck(nil).wrap_after_26(1)).to eq 1
+      expect(deck(nil).wrap_after_26(26)).to eq 26
+      expect(deck(nil).wrap_after_26(27)).to eq 1
+    end
+  end
 end
