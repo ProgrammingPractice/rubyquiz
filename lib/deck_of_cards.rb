@@ -10,7 +10,7 @@ class DeckOfCards
 
   def obtain_keystream(size)
     keystream = ''
-    while keystream.size < size do
+    size.times do
       keystream << obtain_next_letter!
     end
     keystream
@@ -46,16 +46,23 @@ class DeckOfCards
   end
 
   def obtain_next_letter!
+    card = obtain_next_valid_card!
+
+    numbers_to_letters([card])
+  end
+
+  def obtain_next_valid_card!
     move_joker_A_down!
     move_joker_B_down!
     perform_triple_cut!
     perform_count_cut!
 
     card = obtain_next_card
+
     if card_is_joker?(card)
-      ''
+      obtain_next_valid_card!
     else
-      numbers_to_letters([card])
+      card
     end
   end
 
