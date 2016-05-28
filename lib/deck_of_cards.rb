@@ -2,10 +2,10 @@ class DeckOfCards
   JOKER_A = "a"
   JOKER_B = "b"
 
-  attr_reader :deck
+  attr_reader :cards
 
-  def initialize(deck)
-    @deck = deck
+  def initialize(cards)
+    @cards = cards
   end
 
   def obtain_keystream(size)
@@ -13,8 +13,8 @@ class DeckOfCards
     while keystream.size < size do
       move_joker_A_down
       move_joker_B_down
-      @deck = triple_cut_around_jokers
-      @deck = perform_count_cut
+      @cards = triple_cut_around_jokers
+      @cards = perform_count_cut
       keystream << obtain_letter
     end
     keystream
@@ -29,30 +29,30 @@ class DeckOfCards
   end
 
   def triple_cut_around_jokers
-    l, r = [deck.index(JOKER_A), deck.index(JOKER_B)].sort
+    l, r = [cards.index(JOKER_A), cards.index(JOKER_B)].sort
 
-    left   = l > 0 ? deck[0..l - 1] : []
-    middle = deck[l..r]
-    right  = deck[(r + 1)..(deck.size - 1)]
+    left   = l > 0 ? cards[0..l - 1] : []
+    middle = cards[l..r]
+    right  = cards[(r + 1)..(cards.size - 1)]
 
     right.concat(middle).concat(left)
   end
 
   def perform_count_cut
-    count = deck.last
+    count = cards.last
 
-    return deck if card_is_joker?(count)
+    return cards if card_is_joker?(count)
 
-    cut = deck[0..count-1]
-    remainder = deck[count..deck.size-2]
+    cut = cards[0..count-1]
+    remainder = cards[count..cards.size-2]
 
     remainder.concat(cut).concat([count])
   end
 
   def obtain_letter
-    position = deck[0]
+    position = cards[0]
     position = 53 if card_is_joker?(position)
-    card = deck[position]
+    card = cards[position]
     return '' if card_is_joker?(card)
     numbers_to_letters([card])
   end
@@ -88,14 +88,14 @@ class DeckOfCards
   end
 
   def move_card_down(card, count)
-    current_position = deck.index(card)
+    current_position = cards.index(card)
     new_position = current_position + count
 
-    if new_position >= deck.size
-      new_position -= deck.size - 1
+    if new_position >= cards.size
+      new_position -= cards.size - 1
     end
 
-    deck.delete_at(current_position)
-    deck.insert(new_position, card)
+    cards.delete_at(current_position)
+    cards.insert(new_position, card)
   end
 end
