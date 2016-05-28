@@ -39,19 +39,19 @@ describe DeckOfCards do
     end
   end
 
-  describe "#triple_cut_around_jokers" do
+  describe "#perform_triple_cut" do
     it "swaps the cards 'outside' the jokers" do
-      expect(deck([1, 2, j1, 3, j2, 4]).triple_cut_around_jokers).to eq [4, j1, 3, j2, 1, 2]
+      expect(deck([1, 2, j1, 3, j2, 4]).perform_triple_cut).to eq [4, j1, 3, j2, 1, 2]
     end
 
     it "does not assume that Joker A is the first one" do
-      expect(deck([1, j2, 2, j1, 3]).triple_cut_around_jokers).to eq [3, j2, 2, j1, 1]
+      expect(deck([1, j2, 2, j1, 3]).perform_triple_cut).to eq [3, j2, 2, j1, 1]
     end
 
     it "handles special cases for joker positions" do
-      expect(deck([j1, 1, j2, 2]).triple_cut_around_jokers).to eq [2, j1, 1, j2]
-      expect(deck([1, j1, 2, j2]).triple_cut_around_jokers).to eq [j1, 2, j2, 1]
-      expect(deck([1, j1, j2, 2]).triple_cut_around_jokers).to eq([2, j1, j2, 1])
+      expect(deck([j1, 1, j2, 2]).perform_triple_cut).to eq [2, j1, 1, j2]
+      expect(deck([1, j1, 2, j2]).perform_triple_cut).to eq [j1, 2, j2, 1]
+      expect(deck([1, j1, j2, 2]).perform_triple_cut).to eq([2, j1, j2, 1])
     end
   end
 

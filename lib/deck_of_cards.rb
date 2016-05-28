@@ -13,7 +13,7 @@ class DeckOfCards
     while keystream.size < size do
       move_joker_A_down
       move_joker_B_down
-      @cards = triple_cut_around_jokers
+      @cards = perform_triple_cut
       @cards = perform_count_cut
       keystream << obtain_letter
     end
@@ -28,7 +28,7 @@ class DeckOfCards
     move_card_down(JOKER_B, 2)
   end
 
-  def triple_cut_around_jokers
+  def perform_triple_cut
     l, r = [cards.index(JOKER_A), cards.index(JOKER_B)].sort
 
     left   = l > 0 ? cards[0..l - 1] : []
