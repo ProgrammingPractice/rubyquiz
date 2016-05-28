@@ -15,53 +15,53 @@ describe DeckOfCards do
     end
   end
 
-  describe "#move_joker_A_down" do
+  describe "#move_joker_A_down!" do
     it "moves joker A down one position" do
-      expect(deck([j1, 1, 2, 3]).move_joker_A_down).to eq [1, j1, 2, 3]
+      expect(deck([j1, 1, 2, 3]).move_joker_A_down!).to eq [1, j1, 2, 3]
     end
 
     it "moves the joker A below the top card when it is the last card" do
-      expect(deck([1, 2, 3, j1]).move_joker_A_down).to eq [1, j1, 2, 3]
+      expect(deck([1, 2, 3, j1]).move_joker_A_down!).to eq [1, j1, 2, 3]
     end
   end
 
-  describe "#move_joker_B_down" do
+  describe "#move_joker_B_down!" do
     it "moves joker B down two positions" do
-      expect(deck([j2, 1, 2, 3]).move_joker_B_down).to eq [1, 2, j2, 3]
+      expect(deck([j2, 1, 2, 3]).move_joker_B_down!).to eq [1, 2, j2, 3]
     end
 
     it "moves the joker B below the top card when it is right above the last card" do
-      expect(deck([1, 2, j2, 3]).move_joker_B_down).to eq [1, j2, 2, 3]
+      expect(deck([1, 2, j2, 3]).move_joker_B_down!).to eq [1, j2, 2, 3]
     end
 
     it "moves the joker B to third position of deck when it the last card" do
-      expect(deck([1, 2, 3, j2]).move_joker_B_down).to eq [1, 2, j2, 3]
+      expect(deck([1, 2, 3, j2]).move_joker_B_down!).to eq [1, 2, j2, 3]
     end
   end
 
-  describe "#perform_triple_cut" do
+  describe "#perform_triple_cut!" do
     it "swaps the cards 'outside' the jokers" do
-      expect(deck([1, 2, j1, 3, j2, 4]).perform_triple_cut).to eq [4, j1, 3, j2, 1, 2]
+      expect(deck([1, 2, j1, 3, j2, 4]).perform_triple_cut!).to eq [4, j1, 3, j2, 1, 2]
     end
 
     it "does not assume that Joker A is the first one" do
-      expect(deck([1, j2, 2, j1, 3]).perform_triple_cut).to eq [3, j2, 2, j1, 1]
+      expect(deck([1, j2, 2, j1, 3]).perform_triple_cut!).to eq [3, j2, 2, j1, 1]
     end
 
     it "handles special cases for joker positions" do
-      expect(deck([j1, 1, j2, 2]).perform_triple_cut).to eq [2, j1, 1, j2]
-      expect(deck([1, j1, 2, j2]).perform_triple_cut).to eq [j1, 2, j2, 1]
-      expect(deck([1, j1, j2, 2]).perform_triple_cut).to eq([2, j1, j2, 1])
+      expect(deck([j1, 1, j2, 2]).perform_triple_cut!).to eq [2, j1, 1, j2]
+      expect(deck([1, j1, 2, j2]).perform_triple_cut!).to eq [j1, 2, j2, 1]
+      expect(deck([1, j1, j2, 2]).perform_triple_cut!).to eq([2, j1, j2, 1])
     end
   end
 
-  describe "#perform_count_cut" do
+  describe "#perform_count_cut!" do
     it "uses the last card as a count for where to perform the cut" do
-      expect(deck([5, 6, 7, 8, 9, 2]).perform_count_cut).to eq [7, 8, 9, 5, 6, 2]
+      expect(deck([5, 6, 7, 8, 9, 2]).perform_count_cut!).to eq [7, 8, 9, 5, 6, 2]
     end
 
     it "leaves the deck unchanged when the last card is a Joker" do
-      expect(deck([1, 2, 3 , j1]).perform_count_cut).to eq [1, 2, 3 , j1]
+      expect(deck([1, 2, 3 , j1]).perform_count_cut!).to eq [1, 2, 3 , j1]
     end
   end
 
