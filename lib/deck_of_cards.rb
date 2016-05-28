@@ -59,9 +59,12 @@ class DeckOfCards
   end
 
   def obtain_next_card
-    position = cards[0]
-    position = 53 if card_is_joker?(position)
+    position = value_of_card(cards[0])
     cards[position]
+  end
+
+  def value_of_card(card)
+    card_is_joker?(card) ? 53 : card
   end
 
   def letters_to_numbers(letters)
