@@ -15,7 +15,7 @@ class DeckOfCards
       move_joker_B_down!
       perform_triple_cut!
       perform_count_cut!
-      keystream << obtain_letter
+      keystream << obtain_next_letter
     end
     keystream
   end
@@ -49,12 +49,19 @@ class DeckOfCards
     @cards = remainder.concat(cut).concat([count])
   end
 
-  def obtain_letter
+  def obtain_next_letter
+    card = obtain_next_card
+    if card_is_joker?(card)
+      ''
+    else
+      numbers_to_letters([card])
+    end
+  end
+
+  def obtain_next_card
     position = cards[0]
     position = 53 if card_is_joker?(position)
-    card = cards[position]
-    return '' if card_is_joker?(card)
-    numbers_to_letters([card])
+    cards[position]
   end
 
   def letters_to_numbers(letters)
