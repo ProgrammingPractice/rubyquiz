@@ -65,18 +65,18 @@ describe DeckOfCards do
     end
   end
 
-  describe "#obtain_next_letter" do
+  describe "#obtain_next_card" do
     it "returns the letter value of the card at position calculated from first card" do
-      expect(deck([2, 3, 26]).obtain_next_letter).to eq 'Z'
+      expect(deck([2, 3, 26]).obtain_next_card).to eq 26
     end
 
     it "does not return a letter if the output card is a joker" do
-      expect(deck([1, j1]).obtain_next_letter).to eq ''
+      expect(deck([1, j1]).obtain_next_card).to eq j1
     end
 
     it "returns the 54th card when first card is a joker" do
       cards = [j1] + (1..52).to_a + [2]
-      expect(deck(cards).obtain_next_letter).to eq 'B'
+      expect(deck(cards).obtain_next_card).to eq 2
     end
   end
 

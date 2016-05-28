@@ -11,11 +11,7 @@ class DeckOfCards
   def obtain_keystream(size)
     keystream = ''
     while keystream.size < size do
-      move_joker_A_down!
-      move_joker_B_down!
-      perform_triple_cut!
-      perform_count_cut!
-      keystream << obtain_next_letter
+      keystream << obtain_next_letter!
     end
     keystream
   end
@@ -49,7 +45,12 @@ class DeckOfCards
     @cards = remainder.concat(cut).concat([count])
   end
 
-  def obtain_next_letter
+  def obtain_next_letter!
+    move_joker_A_down!
+    move_joker_B_down!
+    perform_triple_cut!
+    perform_count_cut!
+
     card = obtain_next_card
     if card_is_joker?(card)
       ''
