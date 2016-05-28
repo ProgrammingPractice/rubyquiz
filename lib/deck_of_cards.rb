@@ -11,34 +11,34 @@ class DeckOfCards
   def obtain_keystream(size)
     keystream = ''
     while keystream.size < size do
-      move_joker_A_down
-      move_joker_B_down
-      @cards = perform_triple_cut
-      @cards = perform_count_cut
+      move_joker_A_down!
+      move_joker_B_down!
+      perform_triple_cut!
+      perform_count_cut!
       keystream << obtain_letter
     end
     keystream
   end
 
-  def move_joker_A_down
+  def move_joker_A_down!
     move_card_down(JOKER_A, 1)
   end
 
-  def move_joker_B_down
+  def move_joker_B_down!
     move_card_down(JOKER_B, 2)
   end
 
-  def perform_triple_cut
+  def perform_triple_cut!
     l, r = [cards.index(JOKER_A), cards.index(JOKER_B)].sort
 
     left   = l > 0 ? cards[0..l - 1] : []
     middle = cards[l..r]
     right  = cards[(r + 1)..(cards.size - 1)]
 
-    right.concat(middle).concat(left)
+    @cards = right.concat(middle).concat(left)
   end
 
-  def perform_count_cut
+  def perform_count_cut!
     count = cards.last
 
     return cards if card_is_joker?(count)
@@ -46,7 +46,7 @@ class DeckOfCards
     cut = cards[0..count-1]
     remainder = cards[count..cards.size-2]
 
-    remainder.concat(cut).concat([count])
+    @cards = remainder.concat(cut).concat([count])
   end
 
   def obtain_letter
